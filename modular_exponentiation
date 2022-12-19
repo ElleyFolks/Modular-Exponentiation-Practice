@@ -1,0 +1,24 @@
+#quickly solves a problem of the form: x^y (mod n), using modular exponentiation
+
+def mod_expo (x, y, n): #x is number being raised to power, y is exponent, n is base of modulus
+    partial_result = 1
+    s = x
+    binary_expansion = y
+
+    while (binary_expansion > 0):
+        #if expansion has odd power, will simply multiply s & partial result
+        if (binary_expansion % 2 == 1): 
+            partial_result = (partial_result * s) % n #taking (mod n) of each partial result to keep products relatively smaller
+
+        s = (s**2)%n #next term in sequence is previous term squared
+        
+        binary_expansion = binary_expansion // 2 #floor 2 to find next smallest power
+
+    final_result = partial_result
+    return final_result
+
+
+#main program
+result = mod_expo (5,68,7)
+print (result)
+
